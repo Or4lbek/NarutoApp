@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    >
+    android:padding="5dp">
 
 
     <androidx.cardview.widget.CardView
@@ -28,33 +27,32 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:background="@drawable/simple"
+            android:contentDescription="@string/user_image"
             android:scaleType="centerCrop" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shadow_effect" />
+            android:background="@drawable/shadow_effect"
+            android:contentDescription="@string/image_for_shadow_effect" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:padding="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Naruto"
+                android:padding="8dp"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
-
-
-
 
 
         </LinearLayout>

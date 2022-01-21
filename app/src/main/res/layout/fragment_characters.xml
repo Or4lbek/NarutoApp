@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back5"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.CharactersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@drawable/shadow_effect"
         android:id="@+id/recyclerViewCharacters"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/shadow_effect"
         android:paddingTop="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.github.ybq.android.spinkit.SpinKitView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progressBar"
         style="@style/SpinKitView.Large.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/yellow_or"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recyclerViewCharacters"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recyclerViewCharacters"
-        android:visibility="gone"
-        app:SpinKit_Color="@color/yellow_or" />
+        app:layout_constraintTop_toTopOf="@+id/recyclerViewCharacters" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

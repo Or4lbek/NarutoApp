@@ -2,19 +2,24 @@ package com.sapar.narutoapp.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.ArrayList
 
 @Serializable
 data class CharactersItem(
     val age: String,
-    val best_jutsus: ArrayList<String>?,
-    val birthdate: String?,
+    @SerializedName("best_jutsus")
+    val bestJutsus: ArrayList<String>?,
+    @SerializedName("birthdate")
+    val birthDate: String?,
     val clan: String?,
     val classifaction: ArrayList<String>?,
     val firstName: String?,
     val id: Int,
-    val image_url: String?,
+    @SerializedName("image_url")
+    val imageUrl: String?,
     val name: String?,
     val occupation: ArrayList<String>?,
     val village: String?

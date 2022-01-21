@@ -6,39 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/orange_red2"
     tools:context=".view.MainActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:titleTextColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:subtitleTextColor="@color/white"
         android:background="@color/orange_red2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitleTextColor="@color/white"
+        app:titleTextColor="@color/white" />
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="0dp"
-       android:layout_height="0dp"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       android:background="@drawable/shadow_effect"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/toolbar">
-       <androidx.fragment.app.FragmentContainerView
-           android:id="@+id/fragmentContainerView"
-           android:name="androidx.navigation.fragment.NavHostFragment"
-           class="androidx.navigation.fragment.NavHostFragment"
-           android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shadow_effect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-           android:layout_height="0dp"
-           android:layout_gravity="start"
-           app:defaultNavHost="true"
-           app:layout_constraintTop_toTopOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintBottom_toBottomOf="parent"
-           app:navGraph="@navigation/characters_nav" />
-   </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            class="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/characters_nav" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

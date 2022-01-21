@@ -7,4 +7,7 @@
     <string name="age">Age:</string>
     <string name="clan">Clan:</string>
     <string name="logo">logo</string>
+    <string name="user_image">user image</string>
+    <string name="image_for_shadow_effect">image for shadow effect</string>
+    <string name="naruto">Naruto</string>
 </resources>

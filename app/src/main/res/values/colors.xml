@@ -10,5 +10,9 @@
 
 
     <color name="orange">#f2a30b</color>
+    <color name="main3">#A84A2B</color>
+    <color name="orange_red2">#F26B40</color>
     <color name="yellow_or">#ffe182</color>
+    <color name="blue">#0C2FDF</color>
+    <color name="dark_gray">#0C2FDF</color>
 </resources>

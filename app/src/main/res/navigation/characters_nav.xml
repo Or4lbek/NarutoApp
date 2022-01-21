@@ -9,5 +9,30 @@
         android:id="@+id/charactersFragment"
         android:name="com.sapar.narutoapp.view.CharactersFragment"
         android:label="Characters"
-        tools:layout="@layout/fragment_characters" />
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_charactersFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:popEnterAnim="@anim/slide_out_to_left"
+            app:exitAnim="@anim/slide_in_from_left"
+            app:popExitAnim="@anim/slide_out_to_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.sapar.narutoapp.view.CharacterDetailFragment"
+        android:label="{name}"
+        tools:layout="@layout/character_detail_fragment">
+        <action
+            android:id="@+id/action_characterDetailFragment_to_charactersFragment"
+            app:destination="@id/charactersFragment" />
+        <argument
+            android:name="name"
+            app:argType="string"
+             />
+        <argument
+            android:name="character"
+            app:argType="com.sapar.narutoapp.model.CharactersItem" />
+    </fragment>
 </navigation>

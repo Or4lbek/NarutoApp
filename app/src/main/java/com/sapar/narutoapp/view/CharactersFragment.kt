@@ -12,52 +12,69 @@ import com.sapar.narutoapp.R
 import com.sapar.narutoapp.databinding.FragmentCharactersBinding
 import com.sapar.narutoapp.model.CharactersItem
 import com.sapar.narutoapp.view.adapter.CharactersAdapter
-import com.sapar.narutoapp.viewmodel.CharactersFragmentViewModel
-import java.util.*
-import androidx.lifecycle.*
+import com.sapar.narutoapp.viewmodel.CharactersViewModel
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlin.collections.ArrayList
+import com.github.ybq.android.spinkit.style.DoubleBounce
+
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.ThreeBounce
+
 
 class CharactersFragment : Fragment(R.layout.fragment_characters),
     CharactersAdapter.OnItemNoteListener {
+
     private var _binding: FragmentCharactersBinding? = null
     private val binding get() = _binding!!
-    var charactersList: List<CharactersItem> = ArrayList()
+    var charactersList: ArrayList<CharactersItem> = ArrayList()
     lateinit var charactersAdapter: CharactersAdapter
-    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var linearLayoutManager: GridLayoutManager
     var TAG = "Android"
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCharactersBinding.bind(view)
 
         initRecyclerView()
-        initViewModel()
+        initProgressBar()
     }
 
     private fun initRecyclerView() {
-        linearLayoutManager = LinearLayoutManager(requireContext())
+        linearLayoutManager = GridLayoutManager (requireContext(),2)
         binding.recyclerViewCharacters.layoutManager = linearLayoutManager
         charactersAdapter = CharactersAdapter(charactersList, requireContext(), this)
         binding.recyclerViewCharacters.adapter = charactersAdapter
 
         if (charactersList.isEmpty()){
             binding.progressBar.visibility = View.VISIBLE
+            initViewModel()
         }
+    }
+
+    private fun initProgressBar(){
+        val doubleBounce: Sprite = ThreeBounce()
+        binding.progressBar.setIndeterminateDrawable(doubleBounce)
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun initViewModel() {
         Log.d(TAG, "initViewModel: ")
 
-        val viewModel: CharactersFragmentViewModel =
-            ViewModelProvider(this).get(CharactersFragmentViewModel::class.java)
+        val viewModel: CharactersViewModel =
+            ViewModelProvider(this).get(CharactersViewModel::class.java)
         viewModel.getLiveDataObserver().observe(this, Observer {
-            Log.d(TAG, "initViewModel: "+it)
             if (it != null){
                 binding.progressBar.visibility = View.GONE
-                charactersList = it//ArrayList<CharactersItem>
+                for(character in it){
+                    charactersList.add(character)
+                }
+//                charactersList = it//ArrayList<CharactersItem>
                 charactersAdapter.notifyDataSetChanged()
-                Toast.makeText(requireContext(),"Well in getting list...",Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "list: "+it)
+//                Toast.makeText(requireContext(),"Well in getting list...",Toast.LENGTH_SHORT).show()
 
             }
             else{
@@ -73,6 +90,8 @@ class CharactersFragment : Fragment(R.layout.fragment_characters),
     }
 
     override fun onNoteClick(position: Int) {
-        TODO("Not yet implemented")
+        var character:CharactersItem = charactersList[position]
+        val action = CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(character.name.toString(), character)
+        findNavController().navigate(action)
     }
 }

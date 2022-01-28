@@ -11,10 +11,10 @@ import kotlinx.coroutines.launch
 
 class CharactersViewModel : ViewModel() {
 
-    private var liveDataList: MutableLiveData<List<CharactersItem>> = MutableLiveData()
+    private var liveDataCharacters: MutableLiveData<List<CharactersItem>> = MutableLiveData()
 
-    fun getLiveDataObserver(): MutableLiveData<List<CharactersItem>> {
-        return liveDataList
+    fun getCharactersObserver(): MutableLiveData<List<CharactersItem>> {
+        return liveDataCharacters
     }
 
     fun makeApiCall() {
@@ -22,7 +22,7 @@ class CharactersViewModel : ViewModel() {
             val retroInstance = RetroInstance.getRetrofitInstance()
             val retroService = retroInstance.create(RetroServiceInterface::class.java)
             val call = retroService.getCharacters()
-            liveDataList.postValue(call)
+            liveDataCharacters.postValue(call)
         }
     }
 }

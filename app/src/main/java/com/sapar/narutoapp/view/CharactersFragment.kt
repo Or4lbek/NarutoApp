@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,8 +22,7 @@ class CharactersFragment : Fragment(R.layout.fragment_characters),
 
     private var _binding: FragmentCharactersBinding? = null
     private val binding get() = _binding!!
-    var charactersList: ArrayList<CharactersItem> = ArrayList()
-    lateinit var charactersAdapter: CharactersAdapter
+    private lateinit var charactersAdapter: CharactersAdapter
     private lateinit var linearLayoutManager: GridLayoutManager
 
 
@@ -39,10 +37,10 @@ class CharactersFragment : Fragment(R.layout.fragment_characters),
     private fun initRecyclerView() {
         linearLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerViewCharacters.layoutManager = linearLayoutManager
-        charactersAdapter = CharactersAdapter(charactersList, requireContext(), this)
+        charactersAdapter = CharactersAdapter(requireContext(), this)
         binding.recyclerViewCharacters.adapter = charactersAdapter
 
-        if (charactersList.isEmpty()) {
+        if (charactersAdapter.items.isEmpty()) {
             binding.progressBar.visibility = View.VISIBLE
             initViewModel()
         }
@@ -56,14 +54,11 @@ class CharactersFragment : Fragment(R.layout.fragment_characters),
     @SuppressLint("NotifyDataSetChanged")
     fun initViewModel() {
         val viewModel: CharactersViewModel =
-            ViewModelProvider(this).get(CharactersViewModel::class.java)
-        viewModel.getLiveDataObserver().observe(this, Observer {
+            ViewModelProvider(this)[CharactersViewModel::class.java]
+        viewModel.getCharactersObserver().observe(this, {
             if (it != null) {
                 binding.progressBar.visibility = View.GONE
-                for (character in it) {
-                    charactersList.add(character)
-                }
-                charactersAdapter.notifyDataSetChanged()
+                charactersAdapter.items = it
             } else {
                 Toast.makeText(requireContext(), "Error in getting list...", Toast.LENGTH_SHORT)
                     .show()
@@ -72,13 +67,10 @@ class CharactersFragment : Fragment(R.layout.fragment_characters),
         viewModel.makeApiCall()
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = CharactersFragment()
-    }
+
 
     override fun onNoteClick(position: Int) {
-        val character: CharactersItem = charactersList[position]
+        val character: CharactersItem = charactersAdapter.items[position]
         val action = CharactersFragmentDirections.actionCharactersFragmentToCharacterDetailFragment(
             character.name.toString(),
             character

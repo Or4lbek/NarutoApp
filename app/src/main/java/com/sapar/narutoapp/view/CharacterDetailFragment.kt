@@ -18,13 +18,10 @@ class CharacterDetailFragment : Fragment(R.layout.character_detail_fragment) {
     private val binding get() = _binding!!
     private val args: CharacterDetailFragmentArgs by navArgs()
 
-    companion object {
-        fun newInstance() = CharacterDetailFragment()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = CharacterDetailFragmentBinding.bind(view)
+
         val character: CharactersItem = args.character
         viewModel = ViewModelProvider(this)[CharacterDetailViewModel::class.java]
         updateUi(character)
@@ -35,7 +32,7 @@ class CharacterDetailFragment : Fragment(R.layout.character_detail_fragment) {
             .with(requireActivity())
             .load(character.imageUrl)
             .centerCrop()
-            .into(binding.imageViewLogo);
+            .into(binding.imageViewLogo)
 
         with(binding) {
             textViewName.text = character.name

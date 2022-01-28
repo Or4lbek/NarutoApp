@@ -3,9 +3,8 @@ package com.sapar.narutoapp.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.util.ArrayList
+import java.util.*
 
 @Serializable
 data class CharactersItem(
@@ -23,7 +22,7 @@ data class CharactersItem(
     val name: String?,
     val occupation: ArrayList<String>?,
     val village: String?
-) : Parcelable{
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.createStringArrayList(),
@@ -36,8 +35,7 @@ data class CharactersItem(
         parcel.readString(),
         parcel.createStringArrayList(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun describeContents(): Int {
         return 0

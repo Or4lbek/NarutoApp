@@ -7,4 +7,5 @@ interface RetroServiceInterface {
 
     @GET("a5f2d08f-b2dd-4e18-aba2-cb3640f2bc25")
     suspend fun getCharacters(): ArrayList<CharactersItem>
+
 }
